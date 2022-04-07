@@ -1,20 +1,13 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Globalization;
 
 namespace FakeSys32Delete
 {
     internal class Program
     {
-        static void Main()
+        private static void Main()
         {
-            //0x400023A1
             string fileDeletedTranslation = "Deleted file";
-            switch (CultureInfo.CurrentCulture.Name.ToLower())
+            switch (System.Globalization.CultureInfo.CurrentCulture.Name.ToLower())
             {
                 case "it-it":
                     fileDeletedTranslation = "File eliminato";
@@ -39,10 +32,10 @@ namespace FakeSys32Delete
                     break;
                 case "ja-ja":
                     fileDeletedTranslation = "削除されたファイル";
-                        break;
+                    break;
             }
             int wait = 0;
-            foreach (string fileName in Directory.GetFileSystemEntries("C:\\windows\\system32"))
+            foreach (string fileName in System.IO.Directory.GetFileSystemEntries("C:\\windows\\system32"))
             {
                 Console.WriteLine($"{fileDeletedTranslation} - {fileName}");
                 if (wait > 6)
@@ -51,11 +44,7 @@ namespace FakeSys32Delete
                     wait = 0;
                 }
                 else wait++;
-            } 
-
-#if DEBUG
-            Console.ReadKey();
-#endif
+            }
         }
     }
 }
